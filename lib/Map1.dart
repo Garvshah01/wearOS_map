@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:wear/wear.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-
-class GoogleMapScreen extends StatefulWidget{
+class GoogleMapScreen extends StatefulWidget {
   @override
   _GoogleMapScreenState createState() => _GoogleMapScreenState();
 }
@@ -54,7 +53,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen>{
     });
   }
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
       body: WatchShape(builder: (context,shape,child){
           return Container(child:
