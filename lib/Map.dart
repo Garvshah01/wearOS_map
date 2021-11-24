@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'Map1.dart';
+import 'package:my_map/Map2.dart';
+import 'package:my_map/list.dart';
+import 'Map2.dart';
 import 'Map_g2.dart';
+import 'list.dart';
 import 'package:wear/wear.dart';
 
 class NewPage extends StatefulWidget {
@@ -27,6 +30,13 @@ class _NewPageState extends State<NewPage> {
             SizedBox(
               height: 10,
             ),
+            ElevatedButton(
+              child: Text("POI"),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PoiList()),
+              ),
+            )
           ]),
         ));
       },
