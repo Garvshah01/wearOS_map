@@ -21,22 +21,31 @@ class _NewPageState extends State<NewPage> {
             child: Center(
           child: Column(children: [
             SizedBox(
-              height: 50,
+              height: 40,
             ),
-            ElevatedButton(
-                onPressed: () => Navigator.push(context,
+            ListTile(title: Text("Open Map"),
+              onTap:() => Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GoogleMapScreen())),
-                child: Text("Open Map")),
+              leading: Icon(Icons.map),
+              //trailing: Icon(Icons.arrow_right),
+            ),
             SizedBox(
               height: 10,
             ),
-            ElevatedButton(
-              child: Text("POI"),
-              onPressed: () => Navigator.push(
+            ListTile(title: Text("Select POI"),
+              onTap:() => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PoiList()),
-              ),
-            )
+                MaterialPageRoute(builder: (context) => PoiList())),
+              leading: Icon(Icons.location_on_sharp),
+              //trailing: Icon(Icons.arrow_right),
+            ),
+            // ElevatedButton(
+            //   child: Text("POI"),
+            //   onPressed: () => Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => PoiList()),
+            //   ),
+            // ),
           ]),
         ));
       },
