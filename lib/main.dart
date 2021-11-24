@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'Map.dart';
+import 'animation.dart';
 
 void main() {
   runApp(MyApp());

@@ -5,7 +5,7 @@ import 'Map2.dart';
 import 'Map_g2.dart';
 import 'list.dart';
 import 'package:wear/wear.dart';
-
+import 'animation.dart';
 class NewPage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _NewPageState();
@@ -25,7 +25,7 @@ class _NewPageState extends State<NewPage> {
             ),
             ListTile(title: Text("Open Map"),
               onTap:() => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GoogleMapScreen())),
+                    MaterialPageRoute(builder: (context) => AnimationL(0))),
               leading: Icon(Icons.map),
               //trailing: Icon(Icons.arrow_right),
             ),
@@ -35,17 +35,10 @@ class _NewPageState extends State<NewPage> {
             ListTile(title: Text("Select POI"),
               onTap:() => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PoiList())),
+                MaterialPageRoute(builder: (context) => AnimationL(1))),
               leading: Icon(Icons.location_on_sharp),
               //trailing: Icon(Icons.arrow_right),
             ),
-            // ElevatedButton(
-            //   child: Text("POI"),
-            //   onPressed: () => Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => PoiList()),
-            //   ),
-            // ),
           ]),
         ));
       },
