@@ -17,6 +17,12 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     super.initState();
   }
 
+  void _onMapCreated(GoogleMapController controller) {
+    controller.setMapStyle(Utils.mapStyle);
+    setState(() {
+    });
+  }
+
   initilize() {
     Marker marker1 = Marker(
       markerId: MarkerId('id-1'),
@@ -73,6 +79,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
     marker.add(marker4);
     marker.add(marker5);
     marker.add(marker6);
+
     setState(() {});
   }
 
@@ -83,6 +90,7 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       builder: (context, shape, child) {
         return Container(
             child: GoogleMap(
+              onMapCreated: _onMapCreated,
           mapType: MapType.normal,
           compassEnabled: true,
           cameraTargetBounds: CameraTargetBounds.unbounded,
