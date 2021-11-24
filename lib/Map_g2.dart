@@ -8,59 +8,72 @@ class GoogleMapScreen extends StatefulWidget {
 }
 
 class _GoogleMapScreenState extends State<GoogleMapScreen> {
-  Set<Marker> _markers = {};
+  //Completer<GoogleMapController> _controller = Completer();
+  //Map<MarkerId, Marker> marker = <MarkerId, Marker>{};
+  List<Marker> marker = [];
+  @override
+  void initState() {
+    initilize();
+    super.initState();
+  }
 
-  void _onMapCreated(GoogleMapController controller) {
-    controller.setMapStyle(Utils.mapStyle);
-    setState(() {
-      _markers.add(
-        Marker(
-          markerId: MarkerId('id-1'),
-          position: LatLng(28.629467450222382, 77.37286286798305),
-          infoWindow: InfoWindow(
-            title: "Annapurna",
-            snippet: "College Mess :)",
-          ),
-        ),
-      );
-      _markers.add(
-        Marker(
-          markerId: MarkerId('id-1'),
-          position: LatLng(28.629449917631206, 77.37320958750782),
-          infoWindow: InfoWindow(
-            title: "A2Z",
-            snippet: "A2Z",
-          ),
-        ),
-      );
-      _markers.add(
-        Marker(
-          markerId: MarkerId('id-1'),
-          position: LatLng(28.629000435847097, 77.374096586435),
-          infoWindow: InfoWindow(
-            title: "Gate-3",
-          ),
-        ),
-      );
-      _markers.add(
-        Marker(
-          markerId: MarkerId('id-1'),
-          position: LatLng(28.631221676774143, 77.37231399144166),
-          infoWindow: InfoWindow(
-            title: "Gate-2",
-          ),
-        ),
-      );
-      _markers.add(
-        Marker(
-          markerId: MarkerId('id-1'),
-          position: LatLng(28.631260224216607, 77.37092329568665),
-          infoWindow: InfoWindow(
-            title: "Gate-1",
-          ),
-        ),
-      );
-    });
+  initilize() {
+    Marker marker1 = Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(28.629467450222382, 77.37286286798305),
+      infoWindow: InfoWindow(
+        title: "Annapurna",
+        onTap: () {
+          //print(_markers.toString());
+        },
+        snippet: "College Mess :)",
+      ),
+    );
+    Marker marker2 = Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(28.631260224216607, 77.37092329568665),
+      infoWindow: InfoWindow(
+          title: "Gate-1",
+          onTap: () {
+            // print(_markers.toString());
+          }),
+    );
+    Marker marker3 = Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(28.629449917631206, 77.37320958750782),
+      infoWindow: InfoWindow(
+        title: "A2Z",
+        snippet: "A2Z",
+      ),
+    );
+    Marker marker4 = Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(28.629000435847097, 77.374096586435),
+      infoWindow: InfoWindow(
+        title: "Gate-3",
+      ),
+    );
+    Marker marker5 = Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(28.631221676774143, 77.37231399144166),
+      infoWindow: InfoWindow(
+        title: "Gate-2",
+      ),
+    );
+    Marker marker6 = Marker(
+      markerId: MarkerId('id-1'),
+      position: LatLng(28.631260224216607, 77.37092329568665),
+      infoWindow: InfoWindow(
+        title: "Gate-1",
+      ),
+    );
+    marker.add(marker1);
+    marker.add(marker2);
+    marker.add(marker3);
+    marker.add(marker4);
+    marker.add(marker5);
+    marker.add(marker6);
+    setState(() {});
   }
 
   @override
@@ -70,8 +83,13 @@ class _GoogleMapScreenState extends State<GoogleMapScreen> {
       builder: (context, shape, child) {
         return Container(
             child: GoogleMap(
-          onMapCreated: _onMapCreated,
-          markers: _markers,
+          mapType: MapType.normal,
+          compassEnabled: true,
+          cameraTargetBounds: CameraTargetBounds.unbounded,
+          rotateGesturesEnabled: true,
+          scrollGesturesEnabled: true,
+          myLocationButtonEnabled: true,
+          markers: marker.map((e) => e).toSet(),
           initialCameraPosition:
               CameraPosition(target: LatLng(28.630577, 77.372170), zoom: 16),
         ));
@@ -250,3 +268,22 @@ class Utils {
 ]
   ''';
 }
+
+
+
+/*
+
+*/
+
+/*
+      _markers.add(
+       
+      _markers.add(
+          
+      );
+      _markers.add(
+         
+      );
+      _markers.add(
+          
+      );*/
