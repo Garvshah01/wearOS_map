@@ -203,6 +203,18 @@ class Utils {
     ]
   },
   {
+    "featureType": "road.local",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#9e9457"
+      },
+      {
+        "lightness": -40
+      }
+    ]
+  },
+  {
     "featureType": "transit",
     "elementType": "geometry",
     "stylers": [
