@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 import 'package:wear/wear.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -15,6 +16,16 @@ class GoogleMapScreen2 extends StatefulWidget {
 }
 
 class _GoogleMapScreen2State extends State<GoogleMapScreen2> {
+  Location location = new Location();
+  GoogleMapController mapController;
+  bool _serviceEnabled;
+  PermissionStatus _permissionGranted;
+  LocationData _currentPosition;
+  GoogleMapController _controller;
+  LatLng _initialcameraposition = LatLng(0.5937, 0.9629);
+
+  
+  
   final String place;
   final String lat;
   final String lon;
@@ -23,6 +34,7 @@ class _GoogleMapScreen2State extends State<GoogleMapScreen2> {
   @override
   void initState() {
     super.initState();
+    check();
     poiMarker.add(Marker(
       markerId: MarkerId('id-1'),
       position: LatLng(num.parse(lat), num.parse(lon)),
@@ -34,10 +46,53 @@ class _GoogleMapScreen2State extends State<GoogleMapScreen2> {
     ));
   }
 
-  void _onMapCreated(GoogleMapController controller) {
-    controller.setMapStyle(Utils.mapStyle);
+  void _onMapCreated(GoogleMapController _controller) {
+    _controller = _controller;
+    location.onLocationChanged.listen((l) {
+      _controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(l.latitude, l.longitude), zoom: 15),
+        ),
+      );
+    });
+    _controller.setMapStyle(Utils.mapStyle);
     setState(() {});
   }
+
+
+  check() async {
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+      _currentPosition = await location.getLocation();
+      _initialcameraposition =
+          LatLng(_currentPosition.latitude, _currentPosition.longitude);
+      location.onLocationChanged.listen((LocationData currentLocation) {
+        print("${currentLocation.longitude} : ${currentLocation.longitude}");
+        setState(() {
+          _currentPosition = currentLocation;
+          _initialcameraposition =
+              LatLng(_currentPosition.latitude, _currentPosition.longitude);
+        });
+      });
+    }
+  }
+
+  final CameraPosition _initialPositio = CameraPosition(
+    target: LatLng(28.630577, 77.372170),
+    zoom: 16,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +103,8 @@ class _GoogleMapScreen2State extends State<GoogleMapScreen2> {
             child: GoogleMap(
           onMapCreated: _onMapCreated,
           markers: Set.from(poiMarker),
-          initialCameraPosition:
-              CameraPosition(target: LatLng(28.630577, 77.372170), zoom: 16),
+          initialCameraPosition: _initialPositio,
+          myLocationEnabled: true,
         ));
       },
       child: AmbientMode(

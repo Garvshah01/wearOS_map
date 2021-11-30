@@ -35,22 +35,22 @@ class _NewPageState extends State<NewPage> {
             SizedBox(
               height: 10,
             ),
-            // ListTile(title: Text("Select POI"),
-            //   onTap:() => Navigator.push(
-            //     context,
-            //     MaterialPageRoute(builder: (context) => AnimationL(1))),
-            //   leading: Icon(Icons.location_on_sharp),
-            //   //trailing: Icon(Icons.arrow_right),
-            // ),
-            ListTile(
-              title: Text("Select POI"),
-              onTap: () => Navigator.push(
+            ListTile(title: Text("Select POI"),
+              onTap:() => Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CLocation()),
-              ),
+                MaterialPageRoute(builder: (context) => AnimationL(1))),
               leading: Icon(Icons.location_on_sharp),
               //trailing: Icon(Icons.arrow_right),
-            )
+            ),
+            // ListTile(
+            //   title: Text("Select POI"),
+            //   onTap: () => Navigator.push(
+            //     context,
+            //     MaterialPageRoute(builder: (context) => CLocation()),
+            //   ),
+            //   leading: Icon(Icons.location_on_sharp),
+            //   //trailing: Icon(Icons.arrow_right),
+            // )
           ]),
         ));
       },
