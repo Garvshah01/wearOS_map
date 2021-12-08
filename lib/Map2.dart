@@ -39,7 +39,7 @@ class _GoogleMapScreen2State extends State<GoogleMapScreen2> {
       markerId: MarkerId('id-1'),
       position: LatLng(num.parse(lat), num.parse(lon)),
       infoWindow: InfoWindow(
-          title: "Gate-1",
+          title: place,
           onTap: () {
             // print(_markers.toString());
           }),
